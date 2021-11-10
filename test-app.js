@@ -5884,6 +5884,9 @@ function append_files_to_list(path, files) {
       var p = path + encodeURIComponent(item.name).replaceAll("%5C", "%5C%5C").replace(/[!'()*]/g, escape);	// Adding file name to url
       var ddl_link = p;
       const filepath = path + item.name;
+      $("#copy-link").on("click", () => {
+        mdui.snackbar("Copied to clipboard!");
+      });
       var c = "file";
       if (is_lastpage_loaded && item.name == "README.md" && !UI.hide_readme_md) {
         get_file(p, item, function (data) {
