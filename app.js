@@ -5928,10 +5928,6 @@ function append_files_to_list(path, files) {
               </button>
             </div>
 	      </li>`;
-	    $("#copy-link-message").on("click", () => {
-                copyToClipboard(url);
-                mdui.snackbar("Copied to clipboard!");
-            });
     }
   }
   if (targetFiles.length > 0) {
