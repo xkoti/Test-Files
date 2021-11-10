@@ -5854,7 +5854,7 @@ function append_files_to_list(path, files) {
   var is_firstpage = "0" == $list.data("curPageIndex");
   html = "";
   let targetFiles = [];
-  for (i in files) {  
+  for (i in files) {
     var item = files[i];
     var p = path + encodeURIComponent(item.name).replaceAll("%5C", "%5C%5C").replace(/[!'()*]/g, escape) + "/";		// Adding folder name to url 
     if (item.size == undefined) {
@@ -5875,9 +5875,9 @@ function append_files_to_list(path, files) {
 	              <button onclick="window.open('${p}','_blank')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
                   <i class="mdui-icon material-icons dummyclass">launch</i>
                 </button>
-                <button id="" onclick="(function setClipboard(value) {mdui.snackbar("Copied to clipboard!"); var tempInput = document.createElement('input');tempInput.style = 'position: absolute; left: -1000px; top: -1000px';tempInput.value = value;document.body.appendChild(tempInput);tempInput.select();document.execCommand('copy');document.body.removeChild(tempInput);})(window.location.protocol + '//' + window.location.hostname + '${p}')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
+                <button data-id="{{ $i->id }}" onclick="(function setClipboard(value) {var tempInput = document.createElement('input');tempInput.style = 'position: absolute; left: -1000px; top: -1000px';tempInput.value = value;document.body.appendChild(tempInput);tempInput.select();document.execCommand('copy');document.body.removeChild(tempInput);})(window.location.protocol + '//' + window.location.hostname + '${p}')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
                   <i class="mdui-icon material-icons dummyclass">content_copy</i>
-                </button>		
+                </button>
               </div>
 	        </li>`;
     } else {
@@ -5923,12 +5923,12 @@ function append_files_to_list(path, files) {
               <button onclick="window.open('${p}','_blank')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
                 <i class="mdui-icon material-icons dummyclass">launch</i>
               </button>
-              <button onclick="(function setClipboard(value) {mdui.snackbar("Copied to clipboard!"); var tempInput = document.createElement('input');tempInput.style = 'position: absolute; left: -1000px; top: -1000px';tempInput.value = value;document.body.appendChild(tempInput);tempInput.select();document.execCommand('copy');document.body.removeChild(tempInput);})(window.location.protocol + '//' + window.location.hostname + '${ddl_link}')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
+              <button data-id="{{ $i->id }}" onclick="(function setClipboard(value) {var tempInput = document.createElement('input');tempInput.style = 'position: absolute; left: -1000px; top: -1000px';tempInput.value = value;document.body.appendChild(tempInput);tempInput.select();document.execCommand('copy');document.body.removeChild(tempInput);})(window.location.protocol + '//' + window.location.hostname + '${ddl_link}')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
                 <i class="mdui-icon material-icons dummyclass">content_copy</i>
               </button>
             </div>
 	      </li>`;
-    }	  
+    }
   }
   if (targetFiles.length > 0) {
     let old = localStorage.getItem(path);
@@ -5953,7 +5953,15 @@ function append_files_to_list(path, files) {
       .removeClass("mdui-hidden")
       .find(".number")
       .text($list.find("li.mdui-list-item").length);
-  } 
+  }
+  $("#copy-link-message").on("click", () => {
+	  mdui.snackbar("Copied to clipboard!");
+  });
+  $(document).on('click', 'button[data-id]', function (e) {
+    var requested_to = $(this).attr('data-id');
+	mdui.snackbar("Copied to clipboard!");
+    // Do whatever else you need to do.
+});
 }
 function render_search_result_list() {
   var content = `
