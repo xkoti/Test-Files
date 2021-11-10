@@ -5854,9 +5854,6 @@ function append_files_to_list(path, files) {
   var is_firstpage = "0" == $list.data("curPageIndex");
   html = "";
   let targetFiles = [];
-  $("#copy-link-message").on("click", () => {
-    mdui.snackbar("Copied to clipboard!");
-  });
   for (i in files) {
     var item = files[i];
     var p = path + encodeURIComponent(item.name).replaceAll("%5C", "%5C%5C").replace(/[!'()*]/g, escape) + "/";		// Adding folder name to url 
@@ -5878,10 +5875,10 @@ function append_files_to_list(path, files) {
 	              <button onclick="window.open('${p}','_blank')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
                   <i class="mdui-icon material-icons dummyclass">launch</i>
                 </button>
-                <button id="copy-link-message" onclick="(function setClipboard(value) {var tempInput = document.createElement('input');tempInput.style = 'position: absolute; left: -1000px; top: -1000px';tempInput.value = value;document.body.appendChild(tempInput);tempInput.select();document.execCommand('copy');document.body.removeChild(tempInput);})(window.location.protocol + '//' + window.location.hostname + '${p}')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
+                <button id="copy-link-message1" onclick="(function setClipboard(value) {var tempInput = document.createElement('input');tempInput.style = 'position: absolute; left: -1000px; top: -1000px';tempInput.value = value;document.body.appendChild(tempInput);tempInput.select();document.execCommand('copy');document.body.removeChild(tempInput);})(window.location.protocol + '//' + window.location.hostname + '${p}')" class="mdui-textfield-icon mdui-btn mdui-btn-icon dummyclass" style="float: right;">
                   <i class="mdui-icon material-icons dummyclass">content_copy</i>
                 </button>
-		<button id="copy-link">
+		<button id="copy-link-message">
     		  <i class="mdui-icon material-icons dummyclass">adb</i>
     		</button>		
               </div>
@@ -5935,7 +5932,14 @@ function append_files_to_list(path, files) {
             </div>
 	      </li>`;
     }
+    $("#copy-link-message1").on("click", () => {
+    mdui.snackbar("Copied to clipboard!");
+  });	  
+	  
   }
+  $("#copy-link-message").on("click", () => {
+    mdui.snackbar("Copied to clipboard!");
+  });	
   if (targetFiles.length > 0) {
     let old = localStorage.getItem(path);
     let new_children = targetFiles;
