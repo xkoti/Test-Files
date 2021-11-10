@@ -5849,6 +5849,7 @@ function list(path) {
   );
 }
 function append_files_to_list(path, files) {
+  var $$ = mdui.JQ;
   var $list = $("#list");
   var is_lastpage_loaded = null === $list.data("nextPageToken");
   var is_firstpage = "0" == $list.data("curPageIndex");
@@ -5932,12 +5933,12 @@ function append_files_to_list(path, files) {
             </div>
 	      </li>`;
     }
-    $("#copy-link-message1").on("click", () => {
+    $$("#copy-link-message1").on("click", () => {
     mdui.snackbar("Copied to clipboard!");
   });	  
 	  
   }
-  $("#copy-link-message").on("click", () => {
+  $$("#copy-link-message").on("click", () => {
     mdui.snackbar("Copied to clipboard!");
   });	
   if (targetFiles.length > 0) {
