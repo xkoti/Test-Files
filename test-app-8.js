@@ -5854,10 +5854,7 @@ function append_files_to_list(path, files) {
   var is_firstpage = "0" == $list.data("curPageIndex");
   html = "";
   let targetFiles = [];
-  for (i in files) {    
-    $("#copy-link-message").on("click", () => {
-      mdui.snackbar("Copied to clipboard!");
-    });		  
+  for (i in files) {  
     var item = files[i];
     var p = path + encodeURIComponent(item.name).replaceAll("%5C", "%5C%5C").replace(/[!'()*]/g, escape) + "/";		// Adding folder name to url 
     if (item.size == undefined) {
@@ -5959,7 +5956,10 @@ function append_files_to_list(path, files) {
       .removeClass("mdui-hidden")
       .find(".number")
       .text($list.find("li.mdui-list-item").length);
-  }
+  } 
+  $("#copy-link-message").on("click", () => {
+      mdui.snackbar("Copied to clipboard!");
+  }); 
 }
 function render_search_result_list() {
   var content = `
