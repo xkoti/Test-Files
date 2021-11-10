@@ -5862,6 +5862,9 @@ function append_files_to_list(path, files) {
     }
     item.modifiedTime = utc2local(item.modifiedTime);
     item.size = formatFileSize(item.size);
+    $("#copy-link-message").on("click", () => {
+        mdui.snackbar("Copied to clipboard!");
+    });	  
     if (item.mimeType == "application/vnd.google-apps.folder") {
       html += `<li class="mdui-list-item mdui-ripple"><a href="${p}" class="folder">
 	            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${item.name}">
@@ -5884,9 +5887,6 @@ function append_files_to_list(path, files) {
       var p = path + encodeURIComponent(item.name).replaceAll("%5C", "%5C%5C").replace(/[!'()*]/g, escape);	// Adding file name to url
       var ddl_link = p;
       const filepath = path + item.name;
-      $("#copy-link-message").on("click", () => {
-        mdui.snackbar("Copied to clipboard!");
-      });
       var c = "file";
       if (is_lastpage_loaded && item.name == "README.md" && !UI.hide_readme_md) {
         get_file(p, item, function (data) {
