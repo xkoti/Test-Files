@@ -5884,7 +5884,7 @@ function append_files_to_list(path, files) {
       var p = path + encodeURIComponent(item.name).replaceAll("%5C", "%5C%5C").replace(/[!'()*]/g, escape);	// Adding file name to url
       var ddl_link = p;
       const filepath = path + item.name;
-      $("#copy-link").on("click", () => {
+      $("#copy-link-message").on("click", () => {
         mdui.snackbar("Copied to clipboard!");
       });
       var c = "file";
