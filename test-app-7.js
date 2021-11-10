@@ -5855,7 +5855,7 @@ function append_files_to_list(path, files) {
   html = "";
   let targetFiles = [];
   for (i in files) {    
-    $$("#copy-link-message").on("click", () => {
+    $("#copy-link-message").on("click", () => {
       mdui.snackbar("Copied to clipboard!");
     });		  
     var item = files[i];
