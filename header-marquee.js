@@ -1,21 +1,4 @@
-function isElementOverflowing(element) {
-  var overflowX = element.offsetWidth < element.scrollWidth,
-    overflowY = element.offsetHeight < element.scrollHeight;
-
-  return (overflowX || overflowY);
-}
-
-function wrapContentsInMarquee(element) {
-  var marquee = document.createElement('marquee'),
-    contents = element.innerText;
-
-  marquee.innerText = contents;
-  element.innerHTML = '';
-  element.appendChild(marquee);
-}
-
-var element = document.getElementById('overflow');
-
-if (isElementOverflowing(element)) {
-  wrapContentsInMarquee(element);
-}
+$(".marquee").each(function() {
+  if($(this).prop('scrollWidth') > $(this).parent().width())
+    $(this).wrap('<marquee onmouseover="this.stop();" onmouseout="this.start();" scrollamount="3"></marquee>')
+});
